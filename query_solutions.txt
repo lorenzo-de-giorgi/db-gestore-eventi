@@ -1,0 +1,19 @@
+Selezionare tutti gli eventi gratis, cioè con prezzo nullo (19)
+    SELECT * 
+    FROM `events`
+    WHERE `price` IS NULL;
+
+Selezionare tutte le location in ordine alfabetico (82)
+    SELECT * 
+    FROM `locations`
+    ORDER BY `name` ASC;
+
+Selezionare tutti gli eventi che costano meno di 20 euro e durano meno di 3 ore (38)
+    SELECT * FROM `events`
+    WHERE `price` < 20 
+    AND TIME_TO_SEC(`duration`) < 10800;
+
+Selezionare tutti gli eventi di dicembre 2023 (25)
+    SELECT * FROM `events`
+    WHERE `start` >= '2023-12-01 00:00:00'
+    AND `start` < '2024-01-01 00:00:00';
