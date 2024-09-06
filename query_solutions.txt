@@ -17,3 +17,26 @@ Selezionare tutti gli eventi di dicembre 2023 (25)
     SELECT * FROM `events`
     WHERE `start` >= '2023-12-01 00:00:00'
     AND `start` < '2024-01-01 00:00:00';
+
+Selezionare tutti gli eventi con una durata maggiore alle 2 ore (823)
+    SELECT * FROM `events`
+    WHERE TIME_TO_SEC(`duration`) > 7200;
+
+Selezionare tutti gli eventi, mostrando nome, data di inizio, ora di inizio, ora di fine e durata totale (1040)
+    SELECT 
+        `name`,
+        DATE(`start`) AS `data_inizio`,
+        TIME(`start`) AS `ora_inizio`,
+        TIME(ADDTIME(`start`, `duration`)) AS `ora_fine`,
+        `duration` AS `durata_totale`
+    FROM `events`;
+
+Selezionare tutti gli eventi aggiunti da “Fabiano Lombardo” (id: 1202) (132)
+    SELECT * FROM `events`
+    WHERE `user_id` = '1202';
+
+Selezionare il numero totale di eventi per ogni fascia di prezzo (81)
+
+Selezionare tutti gli utenti admin ed editor (9)
+    SELECT * FROM `users`
+    WHERE `role_id` < 3;
