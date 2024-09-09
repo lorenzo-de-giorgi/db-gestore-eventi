@@ -85,5 +85,11 @@
 
 
 17. Selezionare tutti gli utenti che si sono prenotati a più di 70 eventi (74)
+    SELECT `users`.`id`, `users`.`first_name`,
+    COUNT(`bookings`.`event_id`) AS event_count 
+    FROM `users` 
+    JOIN `bookings` ON `users`.`id` = `bookings`.`user_id` 
+    GROUP BY `users`.`id`, `users`.`first_name` 
+    HAVING event_count > 70;
 
 18. Selezionare tutti gli eventi, mostrando il nome dell’evento, il nome della location, il numero di prenotazioni e il totale di biglietti ancora disponibili per l’evento (1040)
