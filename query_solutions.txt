@@ -67,10 +67,22 @@
     WHERE `event_id` = 34;
 
 14. Selezionare tutti i partecipanti all’evento “Festival Jazz Estivo” (slug: festival-jazz-estivo, id: 2) specificando nome e cognome (13)
+    SELECT `first_name` AS nome, `last_name` AS cognome 
+    FROM `users` 
+    JOIN `bookings` 
+    ON `users`.`id` = `bookings`.`id`
+    WHERE `event_id` = 2;
 
 15. Selezionare tutti gli eventi sold out (dove il totale delle prenotazioni è uguale ai biglietti totali per l’evento) (18)
+    SELECT * FROM events 
+    WHERE total_tickets = (SELECT COUNT(*) FROM bookings WHERE event_id = events.id);
 
 16. Selezionare tutte le location in ordine per chi ha ospitato più eventi (82)
+    SELECT locations.name, COUNT(*) as num_events FROM locations
+    JOIN events ON locations.id = events.location_id
+    GROUP BY locations.name
+    ORDER BY num_events DESC;
+
 
 17. Selezionare tutti gli utenti che si sono prenotati a più di 70 eventi (74)
 
