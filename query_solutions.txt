@@ -93,3 +93,11 @@
     HAVING event_count > 70;
 
 18. Selezionare tutti gli eventi, mostrando il nome dell’evento, il nome della location, il numero di prenotazioni e il totale di biglietti ancora disponibili per l’evento (1040)
+    SELECT `events`.`name` AS 'event_name', `locations`.`name` AS 'location_name',
+    COUNT(`bookings`.`event_id`) AS 'number_of_bookings', `events`.`total_tickets` - COUNT(`bookings`.`event_id`) AS 'remaining_tickets' 
+    FROM `locations`
+    INNER JOIN `events`
+        ON `locations`.`id`= `events`.`location_id`
+    INNER JOIN `bookings`
+        ON `events`.`id` = `bookings`.`event_id`
+    GROUP BY `bookings`.`event_id`;
