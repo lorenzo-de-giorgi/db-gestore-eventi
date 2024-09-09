@@ -48,10 +48,23 @@
     WHERE `tag_id` = 1;
 
 11. Selezionare tutti i tag e il prezzo medio degli eventi a loro collegati (11)
+    SELECT * FROM `events` 
+    JOIN `tags` 
+    ON `events`.`id` = `tags`.`id` 
+    WHERE (SELECT AVG(`price`) FROM `events`);
 
 12. Selezionare tutte le location e mostrare quanti eventi si sono tenute in ognuna di esse (82)
+    SELECT `locations`.`id`, `locations`.`name`, 
+    COUNT(`events`.`id`) AS event_count 
+    FROM `locations` 
+    LEFT JOIN `events` 
+    ON `locations`.`id` = `events`.`location_id` 
+    GROUP BY `locations`.`id`, `locations`.`name`;
 
 13. Selezionare tutti i partecipanti per l’evento “Concerto Classico Serale” (slug: concerto-classico-serale, id: 34) (30)
+    SELECT `user_id` AS participant_id 
+    FROM `bookings` 
+    WHERE `event_id` = 34;
 
 14. Selezionare tutti i partecipanti all’evento “Festival Jazz Estivo” (slug: festival-jazz-estivo, id: 2) specificando nome e cognome (13)
 
